@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { list_map, userActions } from './userSlice';
 
 export default function UserRegistry () {
     const [new_user, setNew_user] = useState(''),
-          [users, setUsers] = useState([]);
+          users = useSelector(list_map),
+          dispatch = useDispatch();
 
     function add () {
-        setUsers([new_user, ...users]);
+        dispatch(userActions.add(new_user));
         setNew_user('');
     }
 
